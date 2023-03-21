@@ -1,13 +1,14 @@
 #include "userInput/inputControl.hpp"
 #include "userInput/config/ConfigFile.hpp"
 #include "userInput/config/configControl.hpp"
+#include "miscFunctions.hpp"
 
 
 ConfigFile GlobalConfig{ Configure() };
 
 int main()
 {
-    switch ( chooseAction() )
+    switch ( chooseAction())
     {
         case 1:
             break;
@@ -20,7 +21,7 @@ int main()
         case 5:
             break;
         default:
-            std::cerr << "Something is wrong, I can feel it! (Main.cpp, line " << __LINE__ << ")" << std::endl;
+            throwError("Something is wrong, I can feel it!", __LINE__);
             break;
     }
 

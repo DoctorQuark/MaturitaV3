@@ -1,4 +1,5 @@
 #include "ConfigFile.hpp"
+#include "../../miscFunctions.hpp"
 
 #include <iostream>
 #include <string>
@@ -6,10 +7,19 @@
 
 ConfigFile::ConfigFile()
 {
-    ConfigFile::path = ConfigFile::loadPath();
+    std::string m_defaultPath = "./Debug/.defaultPath";
+
+    if ( fileExists(m_defaultPath))
+    {
+        ConfigFile::path = ConfigFile::loadPath(m_defaultPath);
+    }
+    else
+    {
+        std::cerr <<
+    }
 }
 
-void ConfigFile::setPath( const std::string& t_newPath )
+void ConfigFile::setPath( const std::string &t_newPath )
 {
     ConfigFile::path = t_newPath;
 }
@@ -29,14 +39,14 @@ void ConfigFile::storeNewConfig()
 
 }
 
-std::string ConfigFile::loadPath( const std::string& t_path )
+std::string ConfigFile::loadPath( const std::string &t_path )
 {
-    std::ifstream m_pathFile(t_path );
+    std::ifstream m_pathFile(t_path);
 
     std::string m_loadedPath;
-    if (m_pathFile.is_open() )
+    if ( m_pathFile.is_open())
     {
-        if ( m_pathFile.good() )
+        if ( m_pathFile.good())
         {
             std::getline(m_pathFile, m_loadedPath);
             m_pathFile.close();
@@ -44,7 +54,7 @@ std::string ConfigFile::loadPath( const std::string& t_path )
     }
     else
     {
-        std::cerr << "Cannot open path file: " << t_path << " (ConfigFile.cpp, line " << __LINE__ << ")" << std::endl;
+        throwError("Cannot open path file: " + t_path, __LINE__);
     }
 
     return m_loadedPath;
