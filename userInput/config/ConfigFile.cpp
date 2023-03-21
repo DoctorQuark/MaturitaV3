@@ -13,7 +13,7 @@ ConfigFile::ConfigFile()
     }
     else
     {
-        throwError("Cannot open path file: " + ConfigFile::m_defaultPath, __LINE__);
+        throwError("Cannot open path file: " + ConfigFile::m_defaultPath, __LINE__, __FILE__);
     }
 }
 
@@ -52,7 +52,7 @@ std::string ConfigFile::loadPath( const std::string &t_path )
     }
     else
     {
-        throwError("Cannot open path file: " + t_path, __LINE__);
+        throwError("Cannot open path file: " + t_path, __LINE__, __FILE__);
     }
 
     return m_loadedPath;

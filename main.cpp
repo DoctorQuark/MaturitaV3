@@ -21,7 +21,7 @@ int main()
         case 5:
             break;
         default:
-            throwError("Something is wrong, I can feel it!", __LINE__);
+            throwError("Something is wrong, I can feel it!", __LINE__, __FILE__);
             break;
     }
 

@@ -4,6 +4,6 @@
 #include <iostream>
 
 bool fileExists( const std::string &t_fileName );
-void throwError( const std::string &t_errorMessage, int t_lineNum );
+void throwError( const std::string &t_errorMessage, int t_lineNum, const std::string &t_filePath );
 
 #endif //MATURITNA_MISCFUNCTIONS_HPP
