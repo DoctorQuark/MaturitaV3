@@ -6,5 +6,5 @@ ConfigFile Configure()
     ConfigFile m_configFile;
     m_configFile.loadConfig();
 
-    return ConfigFile();
+    return m_configFile;
 }

@@ -9,13 +9,15 @@ class ConfigFile
     public:
         ConfigFile();
 
-        void setPath( const std::string& t_newPath );
+        void setPath( const std::string &t_newPath );
         std::string getPath();
 
         void loadConfig();
         void storeNewConfig();
     private:
-        std::string loadPath( const std::string& t_path );
+        std::string m_defaultPath;
+        std::string loadPath( const std::string &t_path );
+
         void createConfig();
 
         std::string path;
