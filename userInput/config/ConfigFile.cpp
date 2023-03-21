@@ -7,15 +7,13 @@
 
 ConfigFile::ConfigFile()
 {
-    std::string m_defaultPath = "./Debug/.defaultPath";
-
-    if ( fileExists(m_defaultPath))
+    if ( fileExists(ConfigFile::m_defaultPath))
     {
-        ConfigFile::path = ConfigFile::loadPath(m_defaultPath);
+        ConfigFile::path = ConfigFile::loadPath(ConfigFile::m_defaultPath);
     }
     else
     {
-        std::cerr <<
+        throwError("Cannot open path file: " + ConfigFile::m_defaultPath, __LINE__);
     }
 }
 
