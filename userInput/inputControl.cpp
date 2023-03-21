@@ -20,6 +20,11 @@ int chooseAction()
         switch ( m_inputChar )
         {
 
+            case 'E':
+            case 'e':
+                m_receivedCorrectInput = true;
+                std::cout << "T";
+                return 0;
             case 'R':
             case 'r':
                 m_receivedCorrectInput = true;
@@ -49,8 +54,7 @@ int chooseAction()
                 break;
 
         }
-    }
-    while ( !m_receivedCorrectInput );
+    } while ( !m_receivedCorrectInput );
 
-    return  -1;
+    return -1;
 }
