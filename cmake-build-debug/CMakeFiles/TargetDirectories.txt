@@ -1,3 +1,0 @@
-G:/Maturitna/cmake-build-debug/CMakeFiles/Maturitna.dir
-G:/Maturitna/cmake-build-debug/CMakeFiles/edit_cache.dir
-G:/Maturitna/cmake-build-debug/CMakeFiles/rebuild_cache.dir
