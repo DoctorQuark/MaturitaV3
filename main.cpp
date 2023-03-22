@@ -4,7 +4,7 @@
 #include "miscFunctions.hpp"
 
 
-ConfigFile GlobalConfig{ Configure() };
+ConfigFile GlobalConfig{ configure() };
 
 int main()
 {
@@ -13,6 +13,7 @@ int main()
         case 1:
             break;
         case 2:
+            showConfigMenu();
             break;
         case 3:
             break;

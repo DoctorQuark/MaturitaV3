@@ -13,14 +13,23 @@ class ConfigFile
         std::string getPath();
 
         void loadConfig();
+        std::tuple<std::string, std::string> getConfig( const std::string &t_key );
+        void setConfig( const std::tuple<std::string, std::string> &t_value );
+
         void storeNewConfig();
     private:
-        std::string m_defaultPath;
-        std::string loadPath( const std::string &t_path );
+        struct ConfigFileData
+        {
+            std::string outputFolder;
+            float areaWidth;
+            float areaHeight;
+        };
 
         void createConfig();
+        std::string loadPath( const std::string &t_path );
 
-        std::string path;
+        ConfigFileData m_configFileData;
+        std::string m_path = "../run/debug/config";
 };
 
 

@@ -3,5 +3,8 @@
 
 #include "ConfigFile.hpp"
 
-ConfigFile Configure();
+#include <tuple>
+
+ConfigFile configure();
+std::tuple<std::string, std::string> parseConfigLine( std::string &t_line );
 #endif //MATURITNA_CONFIGCONTROL_HPP

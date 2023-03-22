@@ -1,6 +1,10 @@
 #include "inputControl.hpp"
+#include "config/ConfigFile.hpp"
 
 #include <iostream>
+#include <tuple>
+
+extern ConfigFile GlobalConfig;
 
 int chooseAction()
 {
@@ -23,32 +27,26 @@ int chooseAction()
             case 'E':
             case 'e':
                 m_receivedCorrectInput = true;
-                std::cout << "T";
                 return 0;
             case 'R':
             case 'r':
                 m_receivedCorrectInput = true;
-                std::cout << "R";
                 return 1;
             case 'C':
             case 'c':
                 m_receivedCorrectInput = true;
-                std::cout << "C";
                 return 2;
             case 'B':
             case 'b':
                 m_receivedCorrectInput = true;
-                std::cout << "B";
                 return 3;
             case 'T':
             case 't':
                 m_receivedCorrectInput = true;
-                std::cout << "T";
                 return 4;
             case 'Q':
             case 'q':
                 m_receivedCorrectInput = true;
-                std::cout << "Q";
                 return 5;
             default:
                 break;
@@ -57,4 +55,16 @@ int chooseAction()
     } while ( !m_receivedCorrectInput );
 
     return -1;
+}
+
+void showConfigMenu()
+{
+    const auto [m_keyOutputFolder, m_valueOutputFolder] = GlobalConfig.getConfig("outputFolder");
+    const auto [m_keyAreaWidth, m_valueAreaWidth] = GlobalConfig.getConfig("areaWidth");
+    const auto [m_keyAreaHeight, m_valueAreaHeight] = GlobalConfig.getConfig("areaHeight");
+
+    std::cout << "(A)   " << m_valueOutputFolder << ": " << m_keyOutputFolder << std::endl;
+    std::cout << "(B)   " << m_valueAreaWidth << ": " << m_keyAreaWidth << std::endl;
+    std::cout << "(C)   " << m_valueAreaHeight << ": " << m_keyAreaHeight << std::endl;
+
 }
