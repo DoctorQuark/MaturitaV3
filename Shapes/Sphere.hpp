@@ -4,11 +4,13 @@
 #include <iostream>
 #include <vector>
 
-class Sphere
+#include "Shape.hpp"
+
+class Sphere : public Shape
 {
     public:
-        std::vector<float> center;
         float radius;
+        Sphere( const float t_xPos, const float t_yPos, const float t_radius, const uint8_t t_color[3] );
 };
 
 

@@ -1,14 +1,14 @@
-//
-// Created by mrhap on 21.03.2023.
-//
-
 #ifndef MATURITNA_SHAPE_HPP
 #define MATURITNA_SHAPE_HPP
 
+#include "cstdint"
 
 class Shape
 {
-
+    public:
+        float xPos;
+        float yPos;
+        uint8_t color[3];
 };
 
 

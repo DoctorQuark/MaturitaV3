@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <any>
 
 class ConfigFile
 {
@@ -14,6 +15,7 @@ class ConfigFile
 
         void loadConfig();
         std::tuple<std::string, std::string> getConfig( const std::string &t_key );
+        std::any getConfigValue( const std::string &t_key );
         void setConfig( const std::tuple<std::string, std::string> &t_value );
 
         void storeNewConfig();
@@ -23,6 +25,8 @@ class ConfigFile
             std::string outputFolder;
             float areaWidth;
             float areaHeight;
+            int resolution;
+            int rayBounces;
         };
 
         void createConfig();

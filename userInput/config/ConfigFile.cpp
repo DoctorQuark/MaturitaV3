@@ -48,19 +48,51 @@ std::tuple<std::string, std::string> ConfigFile::getConfig( const std::string &t
 
     if ( t_key == "outputFolder" )
     {
-
         m_output = std::make_tuple(t_key, ConfigFile::m_configFileData.outputFolder);
-
     }
     else if ( t_key == "areaWidth" )
     {
-
         m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.areaWidth));
     }
     else if ( t_key == "areaHeight" )
     {
-
         m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.areaHeight));
+    }
+    else if ( t_key == "resolution" )
+    {
+        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.resolution));
+    }
+    else if ( t_key == "rayBounces" )
+    {
+        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.rayBounces));
+    }
+
+    return m_output;
+}
+
+std::any ConfigFile::getConfigValue( const std::string &t_key )
+{
+    std::any m_output;
+
+    if ( t_key == "outputFolder" )
+    {
+        m_output = ConfigFile::m_configFileData.outputFolder;
+    }
+    else if ( t_key == "areaWidth" )
+    {
+        m_output = ConfigFile::m_configFileData.areaWidth;
+    }
+    else if ( t_key == "areaHeight" )
+    {
+        m_output = ConfigFile::m_configFileData.areaHeight;
+    }
+    else if ( t_key == "resolution" )
+    {
+        m_output = ConfigFile::m_configFileData.resolution;
+    }
+    else if ( t_key == "rayBounces" )
+    {
+        m_output = ConfigFile::m_configFileData.rayBounces;
     }
 
     return m_output;
@@ -82,6 +114,14 @@ void ConfigFile::setConfig( const std::tuple<std::string, std::string> &t_value 
     {
         ConfigFile::m_configFileData.areaHeight = std::stof(m_value);
     }
+    else if ( m_key == "resolution" )
+    {
+        ConfigFile::m_configFileData.resolution = std::stoi(m_value);
+    }
+    else if ( m_key == "rayBounces" )
+    {
+        ConfigFile::m_configFileData.rayBounces = std::stoi(m_value);
+    }
 }
 
 void ConfigFile::storeNewConfig()
@@ -96,6 +136,8 @@ void ConfigFile::createConfig()
     m_configFile << "outputFolder=\".\"" << std::endl;
     m_configFile << "areaWidth=256.0" << std::endl;
     m_configFile << "areaHeight=256.0" << std::endl;
+    m_configFile << "resolution=256" << std::endl;
+    m_configFile << "rayBounces=1" << std::endl;
 }
 
 std::string ConfigFile::loadPath( const std::string &t_path )
