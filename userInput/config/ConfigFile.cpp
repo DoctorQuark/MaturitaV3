@@ -1,17 +1,23 @@
-#include "ConfigFile.hpp"
-#include "../../miscFunctions.hpp"
-#include "configControl.hpp"
-
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <tuple>
 
-ConfigFile::ConfigFile()
+#include "ConfigFile.hpp"
+#include "../../miscFunctions.hpp"
+#include "configControl.hpp"
+#include "../../debugMisc.hpp"
+
+ConfigFile::ConfigFile( )
 {
-    if ( !fileExists(ConfigFile::m_path))
+    if ( !fileExists( ConfigFile::m_path ))
     {
-        ConfigFile::createConfig();
+        std::cout << "Config File does not exist!\nCreating default config file." << std::endl;
+        ConfigFile::createConfig( );
+    }
+    else
+    {
+        std::cout << "Config File found!" << std::endl;
     }
 }
 
@@ -20,143 +26,161 @@ void ConfigFile::setPath( const std::string &t_newPath )
     ConfigFile::m_path = t_newPath;
 }
 
-std::string ConfigFile::getPath()
+std::string ConfigFile::getPath( )
 {
     return ConfigFile::m_path;
 }
 
-void ConfigFile::loadConfig()
+void ConfigFile::loadConfig( )
 {
-    if ( fileExists(m_path))
+    if ( fileExists( m_path ))
     {
-        std::ifstream t_file(m_path);
-        std::string t_line;
+        std::ifstream l_file( m_path );
+        std::string l_line;
 
-        while ( getline(t_file, t_line))
+        while ( getline( l_file, l_line ))
         {
-            std::tuple<std::string, std::string> m_parsedLine = parseConfigLine(t_line);
+            std::tuple<std::string, std::string> l_configLine = parseConfigLine( l_line );
 
-            setConfig(m_parsedLine);
+            setConfig( l_configLine );
         }
     }
-
+    std::cout << "Config File Loaded!" << std::endl;
 }
 
 std::tuple<std::string, std::string> ConfigFile::getConfig( const std::string &t_key )
 {
-    std::tuple<std::string, std::string> m_output;
+    std::tuple<std::string, std::string> l_output;
 
     if ( t_key == "outputFolder" )
     {
-        m_output = std::make_tuple(t_key, ConfigFile::m_configFileData.outputFolder);
+        l_output = std::make_tuple( t_key, ConfigFile::m_configFileData.s_outputFolder );
     }
     else if ( t_key == "areaWidth" )
     {
-        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.areaWidth));
+        l_output = std::make_tuple( t_key, std::to_string( ConfigFile::m_configFileData.s_areaWidth ));
     }
     else if ( t_key == "areaHeight" )
     {
-        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.areaHeight));
+        l_output = std::make_tuple( t_key, std::to_string( ConfigFile::m_configFileData.s_areaHeight ));
     }
     else if ( t_key == "resolution" )
     {
-        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.resolution));
+        l_output = std::make_tuple( t_key, std::to_string( ConfigFile::m_configFileData.s_resolution ));
     }
     else if ( t_key == "rayBounces" )
     {
-        m_output = std::make_tuple(t_key, std::to_string(ConfigFile::m_configFileData.rayBounces));
+        l_output = std::make_tuple( t_key, std::to_string( ConfigFile::m_configFileData.s_rayBounces ));
     }
 
-    return m_output;
+    return l_output;
 }
 
 std::any ConfigFile::getConfigValue( const std::string &t_key )
 {
-    std::any m_output;
+    std::any l_output;
 
     if ( t_key == "outputFolder" )
     {
-        m_output = ConfigFile::m_configFileData.outputFolder;
+        l_output = ConfigFile::m_configFileData.s_outputFolder;
     }
     else if ( t_key == "areaWidth" )
     {
-        m_output = ConfigFile::m_configFileData.areaWidth;
+        l_output = ConfigFile::m_configFileData.s_areaWidth;
     }
     else if ( t_key == "areaHeight" )
     {
-        m_output = ConfigFile::m_configFileData.areaHeight;
+        l_output = ConfigFile::m_configFileData.s_areaHeight;
     }
     else if ( t_key == "resolution" )
     {
-        m_output = ConfigFile::m_configFileData.resolution;
+        l_output = ConfigFile::m_configFileData.s_resolution;
     }
     else if ( t_key == "rayBounces" )
     {
-        m_output = ConfigFile::m_configFileData.rayBounces;
+        l_output = ConfigFile::m_configFileData.s_rayBounces;
     }
 
-    return m_output;
+    return l_output;
 }
 
 void ConfigFile::setConfig( const std::tuple<std::string, std::string> &t_value )
 {
-    const auto [m_key, m_value] = t_value;
+    const auto [l_key, l_value] = t_value;
 
-    if ( m_key == "outputFolder" )
+    if ( l_key == "outputFolder" )
     {
-        ConfigFile::m_configFileData.outputFolder = m_value;
+        ConfigFile::m_configFileData.s_outputFolder = l_value;
     }
-    else if ( m_key == "areaWidth" )
+    else if ( l_key == "areaWidth" )
     {
-        ConfigFile::m_configFileData.areaWidth = std::stof(m_value);
+        ConfigFile::m_configFileData.s_areaWidth = std::stof( l_value );
     }
-    else if ( m_key == "areaHeight" )
+    else if ( l_key == "areaHeight" )
     {
-        ConfigFile::m_configFileData.areaHeight = std::stof(m_value);
+        ConfigFile::m_configFileData.s_areaHeight = std::stof( l_value );
     }
-    else if ( m_key == "resolution" )
+    else if ( l_key == "resolution" )
     {
-        ConfigFile::m_configFileData.resolution = std::stoi(m_value);
+        ConfigFile::m_configFileData.s_resolution = stou( l_value );
     }
-    else if ( m_key == "rayBounces" )
+    else if ( l_key == "rayBounces" )
     {
-        ConfigFile::m_configFileData.rayBounces = std::stoi(m_value);
+        ConfigFile::m_configFileData.s_rayBounces = stou( l_value );
     }
 }
 
-void ConfigFile::storeNewConfig()
+void ConfigFile::storeNewConfig( )
 {
 
 }
 
-void ConfigFile::createConfig()
+void ConfigFile::createConfig( )
 {
-    std::ofstream m_configFile(m_path);
+    std::cout << "Creating config file..." << std::endl;
+    std::ofstream l_configFile( m_path );
 
-    m_configFile << "outputFolder=\".\"" << std::endl;
-    m_configFile << "areaWidth=256.0" << std::endl;
-    m_configFile << "areaHeight=256.0" << std::endl;
-    m_configFile << "resolution=256" << std::endl;
-    m_configFile << "rayBounces=1" << std::endl;
+    l_configFile << "outputFolder=\".\"" << std::endl;
+    l_configFile << "areaWidth=256.0" << std::endl;
+    l_configFile << "areaHeight=256.0" << std::endl;
+    l_configFile << "resolution=256" << std::endl;
+    l_configFile << "rayBounces=0" << std::endl;
+
+    std::cout << "Creating config Created!" << std::endl;
 }
 
 std::string ConfigFile::loadPath( const std::string &t_path )
 {
-    std::ifstream m_pathFile(t_path);
+    std::ifstream l_pathFile( t_path );
 
-    std::string m_loadedPath;
-    if ( m_pathFile.is_open())
+    std::string l_loadedPath;
+    if ( l_pathFile.is_open( ))
     {
-        if ( m_pathFile.good())
+        if ( l_pathFile.good( ))
         {
-            std::getline(m_pathFile, m_loadedPath);
+            std::getline( l_pathFile, l_loadedPath );
         }
     }
     else
     {
-        throwError("Cannot open m_path file: " + t_path, __LINE__, __FILE__);
+        throwCodeError( "Cannot open m_path file: " + t_path, __LINE__, __FILE__, __FUNCTION__ );
     }
 
-    m_pathFile.close();
-    return m_loadedPath;
+    l_pathFile.close( );
+    return l_loadedPath;
+}
+
+[[maybe_unused]] [[noreturn]] void ConfigFile::throwConfigurationError( const std::string &t_errorMessage )
+{
+    throw std::runtime_error( "CONFIGURATION ERROR: " + t_errorMessage );
+}
+
+[[maybe_unused]] void ConfigFile::throwConfigurationWarning( const std::string &t_errorMessage )
+{
+    std::cerr << "CONFIGURATION ERROR: " << t_errorMessage << std::endl;
+}
+
+[[maybe_unused]] void ConfigFile::throwConfigurationMessage( const std::string &t_errorMessage )
+{
+    std::cerr << "CONFIGURATION INFO: " << t_errorMessage << std::endl;
 }

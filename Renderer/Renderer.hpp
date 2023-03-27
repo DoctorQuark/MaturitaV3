@@ -4,23 +4,32 @@
 #include <vector>
 #include <any>
 #include <cstdint>
+#include <array>
+#include <string>
+
+#include "Rotation.hpp"
+#include "../Shapes/ShapeContainer.hpp"
 
 class Renderer
 {
     public:
-        float xCamPos;
-        float yCamPos;
-        float CamFOV;
-        float CamRot;
+        float m_xCamPos;
+        float m_yCamPos;
+        float m_zCamPos{ 2 };
+        float m_camFov;
+        Rotation m_camRot;
 
         Renderer( float t_xPos, float t_yPos, float t_fov );
-        void addShape( const std::any &t_shape );
+        void addShape( const ShapeContainer &t_shapeContainer );
         void startRender();
-        uint8_t *rayCast( float t_horizontalAngle, float t_verticalAngle );
+        void testRenderer( const float t_percentage = 100.0F, const bool t_print = true );
+        std::array<uint8_t, 3> rayCast( const Rotation t_horizontalAngle, const Rotation t_verticalAngle );
+        std::tuple<float, float, float> testRayCast( const Rotation t_horizontalAngle, const Rotation t_verticalAngle );
+        void saveBitmap( const std::string &t_filename, const uint8_t *t_data, unsigned int t_width, unsigned int t_height );
 
     private:
-        std::vector<std::any> shapes;
-        uint8_t image[256][256][3];
+        std::vector<ShapeContainer> m_shapes;
+        std::vector<std::vector<std::vector<uint8_t>>> m_rayCastBuffer;
 };
 
 
