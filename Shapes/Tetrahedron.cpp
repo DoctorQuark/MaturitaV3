@@ -15,31 +15,21 @@ Tetrahedron::Tetrahedron( const float t_xPos, const float t_yPos, const float t_
     Tetrahedron::m_color[0] = t_color[0];
     Tetrahedron::m_color[1] = t_color[1];
     Tetrahedron::m_color[2] = t_color[2];
-    Tetrahedron::m_shapeType = 4U;
-}
-
-Tetrahedron::Tetrahedron( const Tetrahedron &t_other )
-{
-    Tetrahedron::m_xPos = t_other.m_xPos;
-    Tetrahedron::m_yPos = t_other.m_yPos;
-    Tetrahedron::m_zPos = t_other.m_zPos;
-    Tetrahedron::m_xSize = t_other.m_xSize;
-    Tetrahedron::m_ySize = t_other.m_ySize;
-    Tetrahedron::m_zSize = t_other.m_zSize;
-    Tetrahedron::m_color[0] = t_other.m_color[0];
-    Tetrahedron::m_color[1] = t_other.m_color[1];
-    Tetrahedron::m_color[2] = t_other.m_color[2];
-    Tetrahedron::m_shapeType = t_other.m_shapeType;
 }
 
 Tetrahedron::Tetrahedron()
 {
-    Tetrahedron::m_shapeType = 4U;
+
+}
+
+float Tetrahedron::circumscribedSphereRadius()
+{
+    return std::max(std::max(Tetrahedron::m_xSize, Tetrahedron::m_ySize), Tetrahedron::m_zSize) * (2.0f / 3.0f);
 }
 
 ShapeContainer Tetrahedron::pack()
 {
-    return ShapeContainer(*this);
+    return ShapeContainer(this);
 }
 
 uint8_t Tetrahedron::shapeToShapeType()

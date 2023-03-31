@@ -19,7 +19,7 @@ class ShapeContainer
         std::any m_shape;
         uint8_t m_shapeType;
 
-        ShapeContainer( const std::any t_shape );
+        ShapeContainer( const std::any &t_shape );
         ShapeContainer();
         std::variant<Cuboid, Cylinder, Sphere, Tetrahedron> unpack();
 
