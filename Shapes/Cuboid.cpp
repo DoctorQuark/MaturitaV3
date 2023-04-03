@@ -2,7 +2,7 @@
 #include "Sphere.hpp"
 #include <cmath>
 
-Cuboid::Cuboid( const float t_xPos, const float t_yPos, const float t_sizeX, const float t_sizeY, const float t_sizeZ, const uint8_t t_color[3] ) : m_shapeType{ 1U }
+Cuboid::Cuboid( const float t_xPos, const float t_yPos, const float t_sizeX, const float t_sizeY, const float t_sizeZ, const uint8_t t_color[3] )
 {
     Cuboid::m_xPos = t_xPos;
     Cuboid::m_yPos = t_yPos;
@@ -12,16 +12,26 @@ Cuboid::Cuboid( const float t_xPos, const float t_yPos, const float t_sizeX, con
     Cuboid::m_color[0] = t_color[0];
     Cuboid::m_color[1] = t_color[1];
     Cuboid::m_color[2] = t_color[2];
+    Cuboid::m_shapeType = 1U;
 }
 
-Cuboid::Cuboid() : m_shapeType{ 1U }
+Cuboid::Cuboid( const Cuboid &t_other )
 {
-
+    Cuboid::m_xPos = t_other.m_xPos;
+    Cuboid::m_yPos = t_other.m_yPos;
+    Cuboid::m_zPos = t_other.m_zPos;
+    Cuboid::m_xSize = t_other.m_xSize;
+    Cuboid::m_ySize = t_other.m_ySize;
+    Cuboid::m_zSize = t_other.m_zSize;
+    Cuboid::m_color[0] = t_other.m_color[0];
+    Cuboid::m_color[1] = t_other.m_color[1];
+    Cuboid::m_color[2] = t_other.m_color[2];
+    Cuboid::m_shapeType = t_other.m_shapeType;
 }
 
-float Cuboid::circumscribedSphereRadius()
+Cuboid::Cuboid()
 {
-    return std::sqrt(m_xSize * m_xSize + m_ySize * m_ySize + m_zSize * m_zSize) * (1.0F / 2.0F);
+    Cuboid::m_shapeType = 1U;
 }
 
 ShapeContainer Cuboid::pack()

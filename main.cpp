@@ -1,24 +1,24 @@
 #include "userInput/inputControl.hpp"
 #include "userInput/config/ConfigFile.hpp"
 #include "userInput/config/configControl.hpp"
-#include "miscFunctions.hpp"
+#include "debugMisc.hpp"
 #include "run.hpp"
 #include "test.hpp"
 
-ConfigFile g_GlobalConfig{ configure() };
+ConfigFile g_ConfigFile{ configure( ) };
 
-int main()
+int main( )
 {
-    switch ( chooseAction())
+    switch ( chooseAction( ))
     {
         case 1:
         {
-            run();
+            run( );
             break;
         }
         case 2:
         {
-            showConfigMenu();
+            showConfigMenu( );
             break;
         }
         case 3:
@@ -27,7 +27,7 @@ int main()
         }
         case 4:
         {
-            test();
+            test( );
             break;
         }
         case 5:
@@ -36,7 +36,7 @@ int main()
         }
         default:
         {
-            throwError("Something is wrong, I can feel it!", __LINE__, __FILE__);
+            throwCodeError( "Something is wrong, I can feel it!", __LINE__, __FILE__, __FUNCTION__ );
         }
     }
 

@@ -31,8 +31,9 @@ class ConfigFile
 
         void createConfig();
         std::string loadPath( const std::string &t_path );
-        void throwConfigurationError( const std::string &t_errorMessage );
-        void throwConfigurationWarning( const std::string &t_errorMessage );
+        [[maybe_unused]] [[noreturn]] static void throwConfigurationError( const std::string &t_errorMessage );
+        [[maybe_unused]] static void throwConfigurationWarning( const std::string &t_errorMessage );
+        [[maybe_unused]] static void throwConfigurationMessage( const std::string &t_errorMessage );
 
         configFileData m_configFileData;
         std::string m_path = "../test/renderer.conf";

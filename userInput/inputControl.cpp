@@ -1,13 +1,13 @@
 #include "inputControl.hpp"
 #include "config/ConfigFile.hpp"
-#include "../miscFunctions.hpp"
+#include "../debugMisc.hpp"
 
 #include <iostream>
 #include <tuple>
 
-extern ConfigFile g_GlobalConfig;
+extern ConfigFile g_ConfigFile;
 
-int chooseAction()
+int chooseAction( )
 {
     bool m_receivedCorrectInput{ false };
     char m_inputChar{ };
@@ -63,23 +63,24 @@ int chooseAction()
             }
             default:
             {
-                throwWarning("Invalid input!", __LINE__, __FILE__);
+                throwCodeWarning( "Invalid input!", __LINE__, __FILE__, __FUNCTION__ );
                 break;
             }
 
         }
-    } while ( !m_receivedCorrectInput );
+    }
+    while ( !m_receivedCorrectInput );
 
     return -1;
 }
 
-void showConfigMenu()
+void showConfigMenu( )
 {
-    const auto [m_keyOutputFolder, m_valueOutputFolder] = g_GlobalConfig.getConfig("outputFolder");
-    const auto [m_keyAreaWidth, m_valueAreaWidth] = g_GlobalConfig.getConfig("areaWidth");
-    const auto [m_keyAreaHeight, m_valueAreaHeight] = g_GlobalConfig.getConfig("areaHeight");
-    const auto [m_keyResolution, m_valueResolution] = g_GlobalConfig.getConfig("resolution");
-    const auto [m_keyRayBounces, m_valueRayBounces] = g_GlobalConfig.getConfig("rayBounces");
+    const auto [m_keyOutputFolder, m_valueOutputFolder] = g_ConfigFile.getConfig( "outputFolder" );
+    const auto [m_keyAreaWidth, m_valueAreaWidth] = g_ConfigFile.getConfig( "areaWidth" );
+    const auto [m_keyAreaHeight, m_valueAreaHeight] = g_ConfigFile.getConfig( "areaHeight" );
+    const auto [m_keyResolution, m_valueResolution] = g_ConfigFile.getConfig( "resolution" );
+    const auto [m_keyRayBounces, m_valueRayBounces] = g_ConfigFile.getConfig( "rayBounces" );
 
     std::cout << "(A)   " << m_valueOutputFolder << ": " << m_keyOutputFolder << std::endl;
     std::cout << "(B)   " << m_valueAreaWidth << ": " << m_keyAreaWidth << std::endl;

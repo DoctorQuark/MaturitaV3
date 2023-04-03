@@ -19,8 +19,6 @@ class Shape
         // Color of the shape
         uint8_t m_color[3] = { 64, 128, 196 };
 
-        // Calculate the radius of the circumscribed sphere
-        virtual float circumscribedSphereRadius() = 0;
         // Get the shape container
         virtual ShapeContainer pack() = 0;
         // Returns the shape type for this shape.

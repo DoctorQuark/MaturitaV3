@@ -1,4 +1,5 @@
 #include "Cylinder.hpp"
+#include "Cuboid.hpp"
 
 Cylinder::Cylinder( const float t_xPos, const float t_yPos, const float t_radius, const float t_height, const uint8_t t_color[3] )
 {
@@ -9,21 +10,30 @@ Cylinder::Cylinder( const float t_xPos, const float t_yPos, const float t_radius
     Cylinder::m_color[0] = t_color[0];
     Cylinder::m_color[1] = t_color[1];
     Cylinder::m_color[2] = t_color[2];
+    Cylinder::m_shapeType = 2U;
+}
+
+Cylinder::Cylinder( const Cylinder &t_other )
+{
+    Cylinder::m_xPos = t_other.m_xPos;
+    Cylinder::m_yPos = t_other.m_yPos;
+    Cylinder::m_zPos = t_other.m_zPos;
+    Cylinder::m_height = t_other.m_height;
+    Cylinder::m_radius = t_other.m_radius;
+    Cylinder::m_color[0] = t_other.m_color[0];
+    Cylinder::m_color[1] = t_other.m_color[1];
+    Cylinder::m_color[2] = t_other.m_color[2];
+    Cylinder::m_shapeType = t_other.m_shapeType;
 }
 
 Cylinder::Cylinder()
 {
-
-}
-
-float Cylinder::circumscribedSphereRadius()
-{
-    return float(std::sqrt(std::pow(Cylinder::m_radius, 2) + (std::pow(0.5f * Cylinder::m_height, 2))));
+    Cylinder::m_shapeType = 2U;
 }
 
 ShapeContainer Cylinder::pack()
 {
-    return ShapeContainer(this);
+    return ShapeContainer(*this);
 }
 
 uint8_t Cylinder::shapeToShapeType()
