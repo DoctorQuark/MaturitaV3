@@ -16,7 +16,7 @@ set(COMPILE_FLAGS "-Og -pipe")
 #set(COMPILE_FLAGS "-Os -pipe")
 
 #set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS} ${CPU_ARCH} ${WARNING_FLAGS} -Werror")
-Set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS} ${CPU_ARCH} ${WARNING_FLAGS}")
-#Set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS} ${CPU_ARCH}")
+#Set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS} ${CPU_ARCH} ${WARNING_FLAGS}")
+Set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS} ${CPU_ARCH}")
 
-add_executable(${EXECUTABLE_NAME} main.cpp Shapes/Sphere.cpp Shapes/Sphere.hpp userInput/inputControl.cpp userInput/inputControl.hpp userInput/config/configControl.cpp userInput/config/configControl.hpp userInput/config/ConfigFile.cpp userInput/config/ConfigFile.hpp Shapes/Shape.cpp Shapes/Shape.hpp miscFunctions.cpp miscFunctions.hpp Shapes/Cuboid.cpp Shapes/Cuboid.hpp Shapes/Tetrahedron.cpp Shapes/Tetrahedron.hpp Shapes/Cylinder.cpp Shapes/Cylinder.hpp Renderer/Renderer.cpp Renderer/Renderer.hpp run.cpp run.hpp Renderer/rendererMisc.cpp Renderer/rendererMisc.hpp)
+add_executable(${EXECUTABLE_NAME} main.cpp Shapes/Sphere.cpp Shapes/Sphere.hpp userInput/inputControl.cpp userInput/inputControl.hpp userInput/config/configControl.cpp userInput/config/configControl.hpp userInput/config/ConfigFile.cpp userInput/config/ConfigFile.hpp Shapes/Shape.cpp Shapes/Shape.hpp miscFunctions.cpp miscFunctions.hpp Shapes/Cuboid.cpp Shapes/Cuboid.hpp Shapes/Tetrahedron.cpp Shapes/Tetrahedron.hpp Shapes/Cylinder.cpp Shapes/Cylinder.hpp Renderer/Renderer.cpp Renderer/Renderer.hpp run.cpp run.hpp Renderer/rendererMisc.cpp Renderer/rendererMisc.hpp test.cpp Renderer/HitPoint.cpp Renderer/Rotation.cpp Shapes/ShapeContainer.cpp benchmark.cpp debugMisc.cpp errorHandling.cpp)

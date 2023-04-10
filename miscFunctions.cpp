@@ -157,4 +157,6 @@ std::unique_ptr<uint8_t[]> imageDataTo1DArray( const std::vector<std::vector<std
         ++l_i;
         l_j = 0ULL;
     }
+
+    return l_returnData;
 }
